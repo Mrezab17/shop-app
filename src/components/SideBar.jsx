@@ -20,7 +20,7 @@ const SideBar = () => {
       </div>
       <div className="w-full h-1/6   items-center justify-center flex">
         <Link
-          to="/"
+          to="/add"
           className="text-white text-5xl hover:text-6xl hover:text-gray-600"
         >
           <FontAwesomeIcon icon={faPlus} className="" />
