@@ -10,7 +10,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({});
 
-  const fetchListHandler = useCallback(async () => {
+  const fetchProductsHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
@@ -41,15 +41,15 @@ const App = () => {
   });
 
   useEffect(() => {
-    fetchListHandler();
-  }, [fetchListHandler]);
+    fetchProductsHandler();
+  }, []);
 
   const Home = lazy(() => import("./pages/Home"));
   const AddToTable = lazy(() => import("./pages/AddToTable"));
 
   return (
     <>
-      {isLoading ? (
+      {!isLoading ? (
         <Suspense fallback={<Loading />}>
           <Router>
             <div className="w-full h-screen">
@@ -69,7 +69,7 @@ const App = () => {
           </Router>
         </Suspense>
       ) : (
-        <p>Loading</p>
+        <Loading />
       )}
     </>
   );
