@@ -5,7 +5,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faTable } from "@fortawesome/free-solid-svg-icons";
 
 const SideBar = () => {
   return (
@@ -16,6 +16,14 @@ const SideBar = () => {
           className="text-white text-5xl hover:text-6xl hover:text-gray-600"
         >
           <FontAwesomeIcon icon={faHome} className="" />
+        </Link>
+      </div>
+      <div className="w-full h-1/6   items-center justify-center flex">
+        <Link
+          to="/products/1"
+          className="text-white text-5xl hover:text-6xl hover:text-gray-600"
+        >
+          <FontAwesomeIcon icon={faTable} className="" />
         </Link>
       </div>
       <div className="w-full h-1/6   items-center justify-center flex">
@@ -40,14 +48,6 @@ const SideBar = () => {
           className="text-white text-5xl hover:text-6xl hover:text-gray-600"
         >
           <FontAwesomeIcon icon={faCreditCard} className="" />
-        </Link>
-      </div>
-      <div className="w-full h-1/6   items-center justify-center flex">
-        <Link
-          to="/mail"
-          className="text-white text-5xl hover:text-6xl hover:text-gray-600"
-        >
-          <FontAwesomeIcon icon={faEnvelope} className="" />
         </Link>
       </div>
     </div>

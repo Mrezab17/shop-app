@@ -18,8 +18,9 @@ const ErrorPage = (props) => {
         </div>
         <div className="w-full text-6xl flex justify-center">
           <Link to="/" className="text-6xl block">
+            Return Home
             <FontAwesomeIcon icon={faCircleLeft} />
-            {"    "}Return Home
+            {"    "}
           </Link>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { Suspense, lazy, useState, useEffect, useCallback } from "react";
 import SideBar from "./components/SideBar";
 import ErrorPage from "./pages/ErrorPage";
 import Loading from "./components/Loading";
+import Products from "./pages/Products";
 
 const App = () => {
   const [list, setList] = useState();
@@ -56,10 +57,13 @@ const App = () => {
               <SideBar />
               <Switch>
                 <Route exact path="/">
-                  <Home list={list} />
+                  <Home />
                 </Route>
                 <Route exact path="/add">
                   <AddToTable />
+                </Route>
+                <Route exact path="/products/1">
+                  <Products list={list} />
                 </Route>
                 <Route path="*">
                   <ErrorPage error={404} />
