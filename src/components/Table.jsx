@@ -32,6 +32,7 @@ const Table = (props) => {
               onRemove={() => {
                 props.onRemove(item.id);
               }}
+              id={item.id}
             />
           );
         })}

@@ -35,8 +35,9 @@ const App = () => {
     fetchDataHandler();
   }, []);
 
-  const Home = lazy(() => import("./pages/Home"));
   const AddToTable = lazy(() => import("./pages/AddToTable"));
+  const Products = lazy(() => import("./pages/Products"));
+  const Product = lazy(() => import("./pages/Product"));
 
   const removeHandler = (key) => {
     const newList = list.filter((item) => item.id != key);
@@ -61,6 +62,10 @@ const App = () => {
                 <Route exact path="/products/:id">
                   <Products list={list} onRemove={removeHandler} />
                 </Route>
+                <Route exact path="/product/:id">
+                  <Product list={list} />
+                </Route>
+
                 <Route path="*">
                   <ErrorPage error={404} />
                 </Route>
