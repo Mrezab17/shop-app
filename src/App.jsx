@@ -4,50 +4,53 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { Suspense, lazy, useState, useEffect, useCallback } from "react";
+
+import { Suspense, lazy, useState, useEffect } from "react";
+
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 import SideBar from "./components/SideBar";
 import ErrorPage from "./pages/ErrorPage";
 import Loading from "./components/Loading";
-import Products from "./pages/Products";
 
 const baseURL = "https://json.xstack.ir/api/v1/products";
 
 const App = () => {
   const [list, setList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState({});
 
-  async function fetchDataHandler() {
-    setIsLoading(true);
-    const response = await axios
-      .get(baseURL)
-      .then()
-      .catch((error) => {
-        setError(error);
-      });
+  const {
+    data: products,
+    isLoading,
+    error,
+    isError,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const response = await axios.get(baseURL);
+      return response;
+    },
+  });
 
-    setList(response.data.data);
-    setIsLoading(false);
-  }
   useEffect(() => {
-    fetchDataHandler();
-  }, []);
-
-  const AddToTable = lazy(() => import("./pages/AddToTable"));
-  const Products = lazy(() => import("./pages/Products"));
-  const Product = lazy(() => import("./pages/Product"));
+    if (products !== undefined) {
+      setList(products.data.data);
+    }
+  }, [products]);
 
   const removeHandler = (key) => {
     const newList = list.filter((item) => item.id != key);
     setList(newList);
-    console.log(newList);
   };
 
+  const AddToTable = lazy(() => import("./pages/AddToTable"));
+  const Products = lazy(() => import("./pages/Products"));
+  const Product = lazy(() => import("./pages/Product"));
+  if (isLoading) return <Loading />;
+  if (isError) return <p>{error.message}</p>;
   return (
     <>
-      {!isLoading && error ? (
+      {list !== undefined ? (
         <Suspense fallback={<Loading />}>
           <Router>
             <div className="w-full h-screen">
@@ -73,10 +76,8 @@ const App = () => {
             </div>
           </Router>
         </Suspense>
-      ) : isLoading ? (
-        <Loading />
       ) : (
-        <p>{error}</p>
+        <Loading />
       )}
     </>
   );
